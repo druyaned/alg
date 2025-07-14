@@ -56,10 +56,10 @@ And there are some methods with linear complexity <code><b>O(n)</b></code>:
 
 ## Example of CBSTree
 
-<img src="https://github.com/druyaned/alg/src/main/resources/util/t03bintree/CBSTree-transparent-example.png"
+<img src="https://github.com/druyaned/alg/blob/main/src/main/resources/util/t03bintree/CBSTree-transparent-example.png?raw=true"
     height="400" />
 
 ## Example of CBMTree
 
-<img src="https://github.com/druyaned/alg/src/main/resources/util/t03bintree/CBMTree-transparent-example.png"
+<img src="https://github.com/druyaned/alg/blob/main/src/main/resources/util/t03bintree/CBMTree-transparent-example.png?raw=true"
     height="400" />
