@@ -2,7 +2,7 @@
 
 Count-Balance Tree is a self-balancing binary search tree
 that uses counts of descendant nodes in left and right subtrees
-(<code>leftCount</code>} and {<code>rightCount</code>) for balancing
+(<code>leftCount</code> and <code>rightCount</code>) for balancing
 (see <code>unbalanced</code> method) and indexing functionality.
 Null values are not accepted. Balance is achieved by node rotations.
 
