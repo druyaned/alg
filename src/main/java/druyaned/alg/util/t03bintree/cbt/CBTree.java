@@ -107,8 +107,8 @@ public abstract class CBTree<T> implements Iterable<T>, Collection<T> {
     }
     
     /**
-     * Returns {@code true} if the tree is empty, otherwise {@code false}.
-     * @return {@code true} if the tree is empty, otherwise {@code false}
+     * Returns {@code true} if the tree is empty, otherwise - {@code false}.
+     * @return {@code true} if the tree is empty, otherwise - {@code false}
      */
     @Override public boolean isEmpty() {
         return size == 0;
@@ -122,7 +122,7 @@ public abstract class CBTree<T> implements Iterable<T>, Collection<T> {
      * Returns the node with the given value in this tree
      * or {@code null} if there is no such node.
      * 
-     * @param value to get a node
+     * @param value to get the node
      * @return node with the given value in this tree
      *      or {@code null} if there is no such node
      */
@@ -188,7 +188,7 @@ public abstract class CBTree<T> implements Iterable<T>, Collection<T> {
      * Returns the last node, whose value is strictly less than
      * the given value, or {@code null} if there is no such node.
      * 
-     * @param value to get a node
+     * @param value to get the node
      * @return last node, whose value is strictly less than
      *      the given value, or {@code null} if there is no such node
      */
@@ -210,7 +210,7 @@ public abstract class CBTree<T> implements Iterable<T>, Collection<T> {
      * Returns the first node, whose value is strictly greater than
      * the given value, or {@code null} if there is no such node.
      * 
-     * @param value to get a node
+     * @param value to get the node
      * @return first node, whose value is strictly greater than
      *      the given value, or {@code null} if there is no such node
      */
@@ -232,7 +232,7 @@ public abstract class CBTree<T> implements Iterable<T>, Collection<T> {
      * Returns the last node, whose value is less than or equal to
      * the given value, or {@code null} if there is no such node.
      * 
-     * @param value to get a node
+     * @param value to get the node
      * @return last node, whose value is less than or equal to
      *      the given value, or {@code null} if there is no such node
      */
@@ -242,7 +242,7 @@ public abstract class CBTree<T> implements Iterable<T>, Collection<T> {
      * Returns the first node, whose value is greater than or equal to
      * the given value, or {@code null} if there is no such node.
      * 
-     * @param value to get a node
+     * @param value to get the node
      * @return first node, whose value is greater than or equal to
      *      the given value, or {@code null} if there is no such node
      */
@@ -252,7 +252,7 @@ public abstract class CBTree<T> implements Iterable<T>, Collection<T> {
      * Returns index of the last node, whose value is strictly less than
      * the given value, or {@code -1} if there is no such node.
      * 
-     * @param value to get an index
+     * @param value to get the index
      * @return index of the last node, whose value is strictly less than
      *      the given value, or {@code -1} if there is no such node
      */
@@ -276,7 +276,7 @@ public abstract class CBTree<T> implements Iterable<T>, Collection<T> {
      * Returns index of the first node, whose value is strictly greater than
      * the given value, or {@code size} of the tree if there is no such node.
      * 
-     * @param value to get a node
+     * @param value to get the index
      * @return index of the first node, whose value is strictly greater than
      *      the given value, or {@code size} of the tree if there is no such node
      */
@@ -300,7 +300,7 @@ public abstract class CBTree<T> implements Iterable<T>, Collection<T> {
      * Returns index of the last node, whose value is less than or equal to
      * the given value, or {@code -1} if there is no such node.
      * 
-     * @param value to get a node
+     * @param value to get the index
      * @return index of the last node, whose value is less than or equal to
      *      the given value, or {@code -1} if there is no such node
      */
@@ -310,7 +310,7 @@ public abstract class CBTree<T> implements Iterable<T>, Collection<T> {
      * Returns index of the first node, whose value is greater than or equal to
      * the given value, or {@code size} of the tree if there is no such node.
      * 
-     * @param value to get a node
+     * @param value to get the index
      * @return index of the first node, whose value is greater than or equal to
      *      the given value, or {@code size} of the tree if there is no such node
      */
@@ -350,7 +350,7 @@ public abstract class CBTree<T> implements Iterable<T>, Collection<T> {
      * Returns the last value in the tree, that is strictly less than
      * the given value, or {@code null} if there is no such value.
      * 
-     * @param value to get a value
+     * @param value to get the value
      * @return last value in the tree, that is strictly less than
      *      the given value, or {@code null} if there is no such value
      * @see getNodeLess
@@ -364,7 +364,7 @@ public abstract class CBTree<T> implements Iterable<T>, Collection<T> {
      * Returns the first value in the tree, that is strictly greater than
      * the given value, or {@code null} if there is no such value.
      * 
-     * @param value to get a value
+     * @param value to get the value
      * @return first value in the tree, that is strictly greater than
      *      the given value, or {@code null} if there is no such value
      * @see getNodeGreater
@@ -378,7 +378,7 @@ public abstract class CBTree<T> implements Iterable<T>, Collection<T> {
      * Returns the last value in the tree, that is less than or equal to
      * the given value, or {@code null} if there is no such value.
      * 
-     * @param value to get a value
+     * @param value to get the value
      * @return last value in the tree, that is less than or equal to
      *      the given value, or {@code null} if there is no such value
      * @see getNodeLessEq
@@ -392,7 +392,7 @@ public abstract class CBTree<T> implements Iterable<T>, Collection<T> {
      * Returns the first value in the tree, that is greater than or equal to
      * the given value, or {@code null} if there is no such value.
      * 
-     * @param value to get a value
+     * @param value to get the value
      * @return first value in the tree, that is greater than or equal to
      *      the given value, or {@code null} if there is no such value
      */
@@ -425,9 +425,8 @@ public abstract class CBTree<T> implements Iterable<T>, Collection<T> {
      * 
      * <P>
      * Sequence of actions:<ol>
-     *   <li>find the deepest place of a new node;</li>
-     *   <li>create a new node with the given value and attach it
-     *     to the leaf which holds the found place;</li>
+     *   <li>find the deepest place for a new node with the given value;</li>
+     *   <li>create this node and attach it to the leaf which holds the found place;</li>
      *   <li>{@link #insertionBalance balance the tree}.</li>
      * </ol>
      * 
@@ -447,15 +446,14 @@ public abstract class CBTree<T> implements Iterable<T>, Collection<T> {
      * In each iteration:<ol>
      *   <li>corresponding count (left or right) of <b>P</b> is increased;</li>
      *   <li>if <b>P</b> is unbalanced and rotation of <b>P</b>
-     *     leads to unbalancing the <b>N</b>, then rotate <b>N</b>
+     *     leads to unbalancing <b>N</b>, then rotate <b>N</b>
      *     and after that rotate <b>P</b>; next <b>N</b> is <b>P</b>.parent;</li>
-     *   <li>else if <b>P</b> is unbalanced and rotation of it is enough
-     *     to balance the tree just rotate <b>P</b>; next <b>N</b> is
-     *     <b>P</b>.parent;</li>
+     *   <li>else if <b>P</b> is unbalanced and rotation of it is enough for
+     *     balancing just rotate <b>P</b>; next <b>N</b> is <b>P</b>.parent;</li>
      *   <li>otherwise <b>P</b> is balanced and next <b>N</b> is <b>P</b>.</li>
      * </ol>
      * 
-     * @param node new leaf with recently inserted value
+     * @param node new leaf with the inserted value
      */
     protected final void insertionBalance(Node<T> node) {
         for (Node<T> p; (p = node.parent) != null; ) {
@@ -622,9 +620,12 @@ public abstract class CBTree<T> implements Iterable<T>, Collection<T> {
             return indexGreaterEq;
         }
         /**
-         * Returns index of found value in the tree or -1 if the value wasn't found.
+         * Returns index of the value in the tree
+         * or {@code -1} if there is no such value.
+         * 
          * @param value to be found
-         * @return index of found value in the tree or -1 if the value wasn't found
+         * @return index of the value in the tree
+         *      or {@code -1} if there is no such value
          */
         public int getIndexOf(T value) {
             Node<T> node = root;
@@ -706,7 +707,7 @@ public abstract class CBTree<T> implements Iterable<T>, Collection<T> {
          * Returns the first node with the given value in this tree
          * or {@code null} if there is no such node.
          * 
-         * @param value to get a node
+         * @param value to get the node
          * @return first node with the given value in this tree
          *      or {@code null} if there is no such node
          */
@@ -782,12 +783,12 @@ public abstract class CBTree<T> implements Iterable<T>, Collection<T> {
             return indexGreaterEq;
         }
         /**
-         * Returns the first index of the node with the given value
-         * if it was presented in the tree, otherwise returns {@code null}.
+         * Returns the first index of node with the given value,
+         * or {@code -1} if there is no such node.
          * 
          * @param value to found the index
-         * @return first index of the node with the given value
-         *      if it was presented in the tree, otherwise returns {@code null}
+         * @return first index of node with the given value,
+         *      or {@code -1} if there is no such node
          */
         public int getFirstIndexOf(T value) {
             Node<T> node = root;
@@ -807,12 +808,12 @@ public abstract class CBTree<T> implements Iterable<T>, Collection<T> {
             return index;
         }
         /**
-         * Returns the last index of the node with the given value
-         * if it was presented in the tree, otherwise returns {@code null}.
+         * Returns the last index of node with the given value,
+         * or {@code -1} if there is no such node.
          * 
          * @param value to found the index
-         * @return last index of the node with the given value
-         *      if it was presented in the tree, otherwise returns {@code null}
+         * @return last index of node with the given value,
+         *      or {@code -1} if there is no such node
          */
         public int getLastIndexOf(T value) {
             Node<T> node = root;
@@ -847,7 +848,7 @@ public abstract class CBTree<T> implements Iterable<T>, Collection<T> {
      * Sequence of actions:<ol>
      *   <li>find node to be removed or return false;</li>
      *   <li>find <b>M</b> and its <b>C</b>;</li>
-     *   <li>change values of found node and <b>M</b>;</li>
+     *   <li>exchange values between found node and <b>M</b>;</li>
      *   <li>delete <b>M</b>;</li>
      *   <li>{@link #removalBalance balance the tree}.</li>
      * </ol>
@@ -971,14 +972,14 @@ public abstract class CBTree<T> implements Iterable<T>, Collection<T> {
      * In each iteration:<ol>
      *   <li>corresponding count (left or right) of <b>P</b> is decreased;</li>
      *   <li>if <b>P</b> is unbalanced and rotation of <b>P</b>
-     *     leads to unbalancing the <b>P</b> or <b>S</b>, then rotate <b>S</b>
+     *     leads to unbalancing <b>P</b> or <b>S</b>, then rotate <b>S</b>
      *     and after that rotate <b>P</b>; next <b>M</b> is <b>P</b>.parent;</li>
      *   <li> else if <b>P</b> is unbalanced and rotation of it is enough
-     *     to balance the tree just rotate <b>P</b>; next <b>M</b> is <b>P</b>.parent;</li>
+     *     for balancing just rotate <b>P</b>; next <b>M</b> is <b>P</b>.parent;</li>
      *   <li>otherwise <b>P</b> is balanced and next <b>M</b> is <b>P</b>.</li>
      * </ol>
      * 
-     * @param node new leaf with recently inserted value
+     * @param node limit which had held the removed value
      */
     private void removalBalance(Node<T> node) {
         for (Node<T> p; (p = node.parent) != null; ) {
