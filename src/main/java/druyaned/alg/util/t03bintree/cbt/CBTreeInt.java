@@ -111,6 +111,42 @@ public abstract class CBTreeInt {
     
     public abstract Node getNodeGreaterEq(int value);
     
+    public int getIndexLess(int value) {
+        int lessIndex = -1;
+        Node node = root;
+        for (int curr = 0; node != null; ) {
+            int comparison = comp.applyAsInt(node.value, value);
+            if (comparison < 0) {
+                lessIndex = curr + node.leftCount;
+                curr += 1 + node.leftCount;
+                node = node.right;
+            } else {
+                node = node.left;
+            }
+        }
+        return lessIndex;
+    }
+    
+    public int getIndexGreater(int value) {
+        int greaterIndex = size;
+        Node node = root;
+        for (int curr = 0; node != null; ) {
+            int comparison = comp.applyAsInt(node.value, value);
+            if (comparison > 0) {
+                greaterIndex = curr + node.leftCount;
+                node = node.left;
+            } else {
+                curr += 1 + node.leftCount;
+                node = node.right;
+            }
+        }
+        return greaterIndex;
+    }
+    
+    public abstract int getIndexLessEq(int value);
+    
+    public abstract int getIndexGreaterEq(int value);
+    
     public static boolean unbalanced(int increasedCount, int siblingCount) {
         return Integer.numberOfLeadingZeros(siblingCount)
                 - Integer.numberOfLeadingZeros(increasedCount) > 1;
@@ -226,6 +262,40 @@ public abstract class CBTreeInt {
             }
             return greaterEq;
         }
+        @Override public int getIndexLessEq(int value) {
+            int indexLessEq = -1;
+            Node node = root;
+            for (int curr = 0; node != null; ) {
+                int comparison = comp.applyAsInt(node.value, value);
+                if (comparison == 0) {
+                    return curr + node.leftCount;
+                } else if (comparison < 0) {
+                    indexLessEq = curr + node.leftCount;
+                    curr += 1 + node.leftCount;
+                    node = node.right;
+                } else {
+                    node = node.left;
+                }
+            }
+            return indexLessEq;
+        }
+        @Override public int getIndexGreaterEq(int value) {
+            int indexGreaterEq = size;
+            Node node = root;
+            for (int curr = 0; node != null; ) {
+                int comparison = comp.applyAsInt(node.value, value);
+                if (comparison == 0) {
+                    return curr + node.leftCount;
+                } else if (comparison > 0) {
+                    indexGreaterEq = curr + node.leftCount;
+                    node = node.left;
+                } else {
+                    curr += 1 + node.leftCount;
+                    node = node.right;
+                }
+            }
+            return indexGreaterEq;
+        }
         public int getIndexOf(int value) {
             Node node = root;
             for (int curr = 0; node != null; ) {
@@ -323,6 +393,36 @@ public abstract class CBTreeInt {
                 }
             }
             return greaterEq;
+        }
+        @Override public int getIndexLessEq(int value) {
+            int indexLessEq = -1;
+            Node node = root;
+            for (int curr = 0; node != null; ) {
+                int comparison = comp.applyAsInt(node.value, value);
+                if (comparison <= 0) {
+                    indexLessEq = curr + node.leftCount;
+                    curr += 1 + node.leftCount;
+                    node = node.right;
+                } else {
+                    node = node.left;
+                }
+            }
+            return indexLessEq;
+        }
+        @Override public int getIndexGreaterEq(int value) {
+            int indexGreaterEq = size;
+            Node node = root;
+            for (int curr = 0; node != null; ) {
+                int comparison = comp.applyAsInt(node.value, value);
+                if (comparison >= 0) {
+                    indexGreaterEq = curr + node.leftCount;
+                    node = node.left;
+                } else {
+                    curr += 1 + node.leftCount;
+                    node = node.right;
+                }
+            }
+            return indexGreaterEq;
         }
         public int getFirstIndexOf(int value) {
             Node node = root;

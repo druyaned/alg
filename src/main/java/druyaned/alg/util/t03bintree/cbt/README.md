@@ -40,15 +40,28 @@ All modification methods has <code><b>O(log(n))</b></code> time complexity:
 <code>add(Object)</code>, <code>remove(Object)</code>, <code>remove(int)</code>.
 
 All getter methods has <code><b>O(log(n))</b></code> time complexity:
-<code>getNode(Object)</code>, <code>getNodeAt(int)</code>,
-<code>getNodeFirst()</code>, <code>getNodeLast()</code>,
-<code>getNodeLess(Object)</code>, <code>getNodeGreater(Object)</code>,
-<code>getNodeLessEq(Object)</code>, <code>getNodeGreaterEq(Object)</code>,
-<code>contains(Object)</code>, <code>getAt(int)</code>,
-<code>getFirst()</code>, <code>getLast()</code>,
-<code>getLess(Object)</code>, <code>getGreater(Object)</code>,
-<code>getLessEq(Object)</code>, <code>getGreaterEq(Object)</code>,
-<code>CBSTree.getIndexOf(Object)</code>, <code>CBMTree.getFirstIndexOf(Object)</code>,
+<code>getNode(Object)</code>,
+<code>getNodeAt(int)</code>,
+<code>getNodeFirst()</code>,
+<code>getNodeLast()</code>,
+<code>getNodeLess(Object)</code>,
+<code>getNodeGreater(Object)</code>,
+<code>getNodeLessEq(Object)</code>,
+<code>getNodeGreaterEq(Object)</code>,
+<code>contains(Object)</code>,
+<code>getAt(int)</code>,
+<code>getFirst()</code>,
+<code>getLast()</code>,
+<code>getLess(Object)</code>,
+<code>getGreater(Object)</code>,
+<code>getLessEq(Object)</code>,
+<code>getGreaterEq(Object)</code>,
+<code>getIndexLess(Object)}</code>,
+<code>getIndexGreater(Object)}</code>,
+<code>getIndexLessEq(Object)}</code>,
+<code>getIndexGreaterEq(Object)}</code>,
+<code>CBSTree.getIndexOf(Object)</code>,
+<code>CBMTree.getFirstIndexOf(Object)</code>,
 <code>CBMTree.getLastIndexOf(Object)</code>.
 
 And there are some methods with linear complexity <code><b>O(n)</b></code>:

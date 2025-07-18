@@ -309,23 +309,31 @@ public class CBTreeTest {
         int index;
         if ((index = BinarySearch.right(list, e -> e.compareTo(value) < 0)) == -1) {
             assertNull(tree.getLess(value));
+            assertEquals(-1, tree.getIndexLess(value));
         } else {
             assertEquals(list.get(index), tree.getLess(value));
-        }
-        if ((index = BinarySearch.right(list, e -> e.compareTo(value) <= 0)) == -1) {
-            assertNull(tree.getLessEq(value));
-        } else {
-            assertEquals(list.get(index), tree.getLessEq(value));
+            assertEquals(index, tree.getIndexLess(value));
         }
         if ((index = BinarySearch.left(list, e -> e.compareTo(value) > 0)) == list.size()) {
             assertNull(tree.getGreater(value));
+            assertEquals(list.size(), tree.getIndexGreater(value));
         } else {
             assertEquals(list.get(index), tree.getGreater(value));
+            assertEquals(index, tree.getIndexGreater(value));
+        }
+        if ((index = BinarySearch.right(list, e -> e.compareTo(value) <= 0)) == -1) {
+            assertNull(tree.getLessEq(value));
+            assertEquals(-1, tree.getIndexLessEq(value));
+        } else {
+            assertEquals(list.get(index), tree.getLessEq(value));
+            assertEquals(index, tree.getIndexLessEq(value));
         }
         if ((index = BinarySearch.left(list, e -> e.compareTo(value) >= 0)) == list.size()) {
             assertNull(tree.getGreaterEq(value));
+            assertEquals(list.size(), tree.getIndexGreaterEq(value));
         } else {
             assertEquals(list.get(index), tree.getGreaterEq(value));
+            assertEquals(index, tree.getIndexGreaterEq(value));
         }
     }
     
@@ -335,28 +343,28 @@ public class CBTreeTest {
         int maxVal = +32_768;
         int n = 2 * (maxVal - minVal + 1);
         IntSupplier nextValue = () -> minVal + random.nextInt(maxVal - minVal + 1);
-        assertThrows(IndexOutOfBoundsException.class, () -> tree.remove(0));
-        assertThrows(IndexOutOfBoundsException.class, () -> treeRep.remove(0));
+        assertThrows(IndexOutOfBoundsException.class, () -> tree.removeAt(0));
+        assertThrows(IndexOutOfBoundsException.class, () -> treeRep.removeAt(0));
         for (int i = 0; i < n; i++) {
             int value = nextValue.getAsInt();
             tree.add(value);
             treeRep.add(value);
         }
-        assertThrows(IndexOutOfBoundsException.class, () -> tree.remove(-2));
-        assertThrows(IndexOutOfBoundsException.class, () -> tree.remove(-1));
-        assertThrows(IndexOutOfBoundsException.class, () -> tree.remove(tree.size()));
-        assertThrows(IndexOutOfBoundsException.class, () -> tree.remove(tree.size() + 1));
-        assertThrows(IndexOutOfBoundsException.class, () -> treeRep.remove(-2));
-        assertThrows(IndexOutOfBoundsException.class, () -> treeRep.remove(-1));
-        assertThrows(IndexOutOfBoundsException.class, () -> treeRep.remove(treeRep.size()));
-        assertThrows(IndexOutOfBoundsException.class, () -> treeRep.remove(treeRep.size() + 1));
+        assertThrows(IndexOutOfBoundsException.class, () -> tree.removeAt(-2));
+        assertThrows(IndexOutOfBoundsException.class, () -> tree.removeAt(-1));
+        assertThrows(IndexOutOfBoundsException.class, () -> tree.removeAt(tree.size()));
+        assertThrows(IndexOutOfBoundsException.class, () -> tree.removeAt(tree.size() + 1));
+        assertThrows(IndexOutOfBoundsException.class, () -> treeRep.removeAt(-2));
+        assertThrows(IndexOutOfBoundsException.class, () -> treeRep.removeAt(-1));
+        assertThrows(IndexOutOfBoundsException.class, () -> treeRep.removeAt(treeRep.size()));
+        assertThrows(IndexOutOfBoundsException.class, () -> treeRep.removeAt(treeRep.size() + 1));
         for (int size = tree.size(); size > 0; size--) {
             int index = random.nextInt(size);
-            assertEquals(tree.getAt(index), tree.remove(index));
+            assertEquals(tree.getAt(index), tree.removeAt(index));
         }
         for (int size = treeRep.size(); size > 0; size--) {
             int index = random.nextInt(size);
-            assertEquals(treeRep.getAt(index), treeRep.remove(index));
+            assertEquals(treeRep.getAt(index), treeRep.removeAt(index));
         }
         assertionsOfEmptyTrees();
     }

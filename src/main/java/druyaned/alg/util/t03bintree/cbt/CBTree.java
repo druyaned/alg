@@ -26,17 +26,30 @@ import java.util.function.Consumer;
  * <P>
  * <i>Time complexity of methods</i><br>
  * All modification methods has <code><b>O(log(n))</b></code> time complexity:
- * {@link #add(Object)}, {@link #remove(Object)}, {@link #remove(int)}.<br>
+ * {@link #add(Object)}, {@link #remove(Object)}, {@link #removeAt(int)}.<br>
  * All getter methods has <code><b>O(log(n))</b></code> time complexity:
- * {@link #getNode(Object)}, {@link #getNodeAt(int)},
- * {@link #getNodeFirst()}, {@link #getNodeLast()},
- * {@link #getNodeLess(Object)}, {@link #getNodeGreater(Object)},
- * {@link #getNodeLessEq(Object)}, {@link #getNodeGreaterEq(Object)},
- * {@link #contains(Object)}, {@link #getAt(int)},
- * {@link #getFirst()}, {@link #getLast()},
- * {@link #getLess(Object)}, {@link #getGreater(Object)},
- * {@link #getLessEq(Object)}, {@link #getGreaterEq(Object)},
- * {@link CBSTree#getIndexOf(Object)}, {@link CBMTree#getFirstIndexOf(Object)},
+ * {@link #getNode(Object)},
+ * {@link #getNodeAt(int)},
+ * {@link #getNodeFirst()},
+ * {@link #getNodeLast()},
+ * {@link #getNodeLess(Object)},
+ * {@link #getNodeGreater(Object)},
+ * {@link #getNodeLessEq(Object)},
+ * {@link #getNodeGreaterEq(Object)},
+ * {@link #contains(Object)},
+ * {@link #getAt(int)},
+ * {@link #getFirst()},
+ * {@link #getLast()},
+ * {@link #getLess(Object)},
+ * {@link #getGreater(Object)},
+ * {@link #getLessEq(Object)},
+ * {@link #getGreaterEq(Object)},
+ * {@link #getIndexLess(Object)},
+ * {@link #getIndexGreater(Object)},
+ * {@link #getIndexLessEq(Object)},
+ * {@link #getIndexGreaterEq(Object)},
+ * {@link CBSTree#getIndexOf(Object)},
+ * {@link CBMTree#getFirstIndexOf(Object)},
  * {@link CBMTree#getLastIndexOf(Object)}.<br>
  * And there are some methods with linear complexity <code><b>O(n)</b></code>:
  * {@link #forEachNode(Consumer)}, {@link #forEach(Consumer)}, {@link #clear()}.
@@ -50,13 +63,13 @@ public abstract class CBTree<T> implements Iterable<T>, Collection<T> {
     /**
      * The root of the tree is an entry point for most operations.
      * Must be modified only in {@link #add(Object)}, {@link #remove(Object)},
-     * {@link #remove(int)} and {@link #clear()} methods.
+     * {@link #removeAt(int)} and {@link #clear()} methods.
      */
     protected Node<T> root = null;
     
     /**
      * Number of nodes in the tree. Must be modified only in {@link #add(Object)},
-     * {@link #remove(Object)}, {@link #remove(int)} and {@link #clear()} methods.
+     * {@link #remove(Object)}, {@link #removeAt(int)} and {@link #clear()} methods.
      */
     protected int size = 0;
     
@@ -234,6 +247,74 @@ public abstract class CBTree<T> implements Iterable<T>, Collection<T> {
      *      the given value, or {@code null} if there is no such node
      */
     public abstract Node<T> getNodeGreaterEq(T value);
+    
+    /**
+     * Returns index of the last node, whose value is strictly less than
+     * the given value, or {@code -1} if there is no such node.
+     * 
+     * @param value to get an index
+     * @return index of the last node, whose value is strictly less than
+     *      the given value, or {@code -1} if there is no such node
+     */
+    public int getIndexLess(T value) {
+        int lessIndex = -1;
+        Node<T> node = root;
+        for (int curr = 0; node != null; ) {
+            int comparison = comp.compare(node.value, value);
+            if (comparison < 0) {
+                lessIndex = curr + node.leftCount;
+                curr += 1 + node.leftCount;
+                node = node.right;
+            } else {
+                node = node.left;
+            }
+        }
+        return lessIndex;
+    }
+    
+    /**
+     * Returns index of the first node, whose value is strictly greater than
+     * the given value, or {@code size} of the tree if there is no such node.
+     * 
+     * @param value to get a node
+     * @return index of the first node, whose value is strictly greater than
+     *      the given value, or {@code size} of the tree if there is no such node
+     */
+    public int getIndexGreater(T value) {
+        int greaterIndex = size;
+        Node<T> node = root;
+        for (int curr = 0; node != null; ) {
+            int comparison = comp.compare(node.value, value);
+            if (comparison > 0) {
+                greaterIndex = curr + node.leftCount;
+                node = node.left;
+            } else {
+                curr += 1 + node.leftCount;
+                node = node.right;
+            }
+        }
+        return greaterIndex;
+    }
+    
+    /**
+     * Returns index of the last node, whose value is less than or equal to
+     * the given value, or {@code -1} if there is no such node.
+     * 
+     * @param value to get a node
+     * @return index of the last node, whose value is less than or equal to
+     *      the given value, or {@code -1} if there is no such node
+     */
+    public abstract int getIndexLessEq(T value);
+    
+    /**
+     * Returns index of the first node, whose value is greater than or equal to
+     * the given value, or {@code size} of the tree if there is no such node.
+     * 
+     * @param value to get a node
+     * @return index of the first node, whose value is greater than or equal to
+     *      the given value, or {@code size} of the tree if there is no such node
+     */
+    public abstract int getIndexGreaterEq(T value);
     
     /**
      * Returns value at the specified index.
@@ -506,6 +587,40 @@ public abstract class CBTree<T> implements Iterable<T>, Collection<T> {
             }
             return greaterEq;
         }
+        @Override public int getIndexLessEq(T value) {
+            int indexLessEq = -1;
+            Node<T> node = root;
+            for (int curr = 0; node != null; ) {
+                int comparison = comp.compare(node.value, value);
+                if (comparison == 0) {
+                    return curr + node.leftCount;
+                } else if (comparison < 0) {
+                    indexLessEq = curr + node.leftCount;
+                    curr += 1 + node.leftCount;
+                    node = node.right;
+                } else {
+                    node = node.left;
+                }
+            }
+            return indexLessEq;
+        }
+        @Override public int getIndexGreaterEq(T value) {
+            int indexGreaterEq = size;
+            Node<T> node = root;
+            for (int curr = 0; node != null; ) {
+                int comparison = comp.compare(node.value, value);
+                if (comparison == 0) {
+                    return curr + node.leftCount;
+                } else if (comparison > 0) {
+                    indexGreaterEq = curr + node.leftCount;
+                    node = node.left;
+                } else {
+                    curr += 1 + node.leftCount;
+                    node = node.right;
+                }
+            }
+            return indexGreaterEq;
+        }
         /**
          * Returns index of found value in the tree or -1 if the value wasn't found.
          * @param value to be found
@@ -614,10 +729,7 @@ public abstract class CBTree<T> implements Iterable<T>, Collection<T> {
             Node<T> lessEq = null;
             for (Node<T> node = root; node != null; ) {
                 int comparison = comp.compare(node.value, value);
-                if (comparison == 0) {
-                    lessEq = node;
-                    node = node.right;
-                } else if (comparison < 0) {
+                if (comparison <= 0) {
                     lessEq = node;
                     node = node.right;
                 } else {
@@ -630,10 +742,7 @@ public abstract class CBTree<T> implements Iterable<T>, Collection<T> {
             Node<T> greaterEq = null;
             for (Node<T> node = root; node != null; ) {
                 int comparison = comp.compare(node.value, value);
-                if (comparison == 0) {
-                    greaterEq = node;
-                    node = node.left;
-                } else if (comparison > 0) {
+                if (comparison >= 0) {
                     greaterEq = node;
                     node = node.left;
                 } else {
@@ -641,6 +750,36 @@ public abstract class CBTree<T> implements Iterable<T>, Collection<T> {
                 }
             }
             return greaterEq;
+        }
+        @Override public int getIndexLessEq(T value) {
+            int indexLessEq = -1;
+            Node<T> node = root;
+            for (int curr = 0; node != null; ) {
+                int comparison = comp.compare(node.value, value);
+                if (comparison <= 0) {
+                    indexLessEq = curr + node.leftCount;
+                    curr += 1 + node.leftCount;
+                    node = node.right;
+                } else {
+                    node = node.left;
+                }
+            }
+            return indexLessEq;
+        }
+        @Override public int getIndexGreaterEq(T value) {
+            int indexGreaterEq = size;
+            Node<T> node = root;
+            for (int curr = 0; node != null; ) {
+                int comparison = comp.compare(node.value, value);
+                if (comparison >= 0) {
+                    indexGreaterEq = curr + node.leftCount;
+                    node = node.left;
+                } else {
+                    curr += 1 + node.leftCount;
+                    node = node.right;
+                }
+            }
+            return indexGreaterEq;
         }
         /**
          * Returns the first index of the node with the given value
@@ -747,7 +886,7 @@ public abstract class CBTree<T> implements Iterable<T>, Collection<T> {
      * @param index node at this index is being deleted
      * @return removed value if it was removed, otherwise - {@code null}
      */
-    public T remove(int index) {
+    public T removeAt(int index) {
         throwIfBadIndex(index);
         // find node to be removed or return null
         Node<T> found = getNodeAt(index);
